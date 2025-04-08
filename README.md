@@ -1,10 +1,18 @@
-# What is this repo
+# پروژه کارشناسی دانشگاه آزاد
 
-a collection of all the tools and resources I've used to learn and work with vscode developing
-in an effort to automate the process of creating a repository with these tools included and to
-document them for future reference.  This is a work in progress and will be updated as I learn
-more descriptions are added in each file as comments but may be added here in future
+این پروژه با هدف ساده سازی روند اجرای سایت وردپرس روی یک سرور مجازی ایجاد شده در ادامه نحوه استفاده از فایل های این مخزن برای اجرای سایت وردپرس و بهینه سازی آن میپردازیم
 
-## Mermaid
+## نحوه اچرای پروژه
 
-You can add memaid to README.MD by installing bierner.markdown-mermaid extention
+ابتدا این مخزن را روی سرور خود کپی میکنیم
+
+```console
+git clone https://github.com/BIGboss248/azad-university-project.git
+```
+
+پس از آن 
+
+```console
+sudo apt update && sudo apt install make
+```
+پس از نصب make
