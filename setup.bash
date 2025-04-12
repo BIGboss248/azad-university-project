@@ -27,3 +27,10 @@ else
   echo "Error: $env_file not found!"
   exit 1
 fi
+
+if [-f "./Makefile"]; then
+  make certbot_nginx CLOUDFLARE_API_TOKEN=$cloudflare_token DOMAIN=$domain
+else
+  echo "Error: Makefile not found!"
+  exit 1
+fi
