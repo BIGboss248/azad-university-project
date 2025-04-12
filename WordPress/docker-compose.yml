@@ -23,15 +23,6 @@ services:
       timeout: 30s
       retries: 5
       start_period: 30s
-    labels:
-      - "traefik.enable=true"
-      #- "traefik.http.services.WordPress_service.loadbalancer.server.port: 80"
-      - "traefik.http.routers.WordPress.entrypoints=web"
-      - "traefik.http.routers.WordPress.rule=Host(`${WordPress_Domain}`)"
-      - "traefik.http.routers.WordPress-secure.tls=true"
-      - "traefik.http.routers.WordPress-secure.entrypoints=websecure"
-      - "traefik.http.routers.WordPress-secure.rule=Host(`${WordPress_Domain}`)"
-      - "traefik.http.routers.WordPress-secure.tls.certresolver=myresolver"
 
   wordpress_db:
     container_name: wordpress_db
