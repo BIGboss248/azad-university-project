@@ -1,6 +1,8 @@
 #!/bin/bash
 
-sudo apt update && sudo apt install make
+sudo apt update && sudo apt install make git
+
+git clone https://github.com/BIGboss248/azad-university-project.git
 
 # Function to generate a random string
 generate_random_string() {
