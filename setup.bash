@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# One command setup run
+# curl -s https://raw.githubusercontent.com/BIGboss248/azad-university-project/refs/heads/main/setup.bash | bash
+
 sudo apt update && sudo apt install make git nginx
 
 git clone https://github.com/BIGboss248/azad-university-project.git
@@ -38,11 +41,55 @@ echo "New .env file created successfully at $env_file."
 
 makefile=$(pwd)"/Makefile"
 if [ -f $makefile ]; then
+  make docker
   make certbot_nginx CLOUDFLARE_API_TOKEN=$cloudflare_token DOMAIN=$domain
 else
   echo "Error: Makefile not found!"
   exit 1
 fi
+
+sudo rm -rf /etc/nginx/conf.d/*
+sudo rm -rf /etc/nginx/nginx.conf
+sudo touch /etc/nginx/nginx.conf
+sudo bash -c 'cat <<EOL > /etc/nginx/nginx.conf
+events { 
+  worker_connections 1024;
+}
+
+http {
+  # HTTP to HTTPS redirection
+  server {
+    listen 80;
+    server_name '"$domain"';
+    # Set webroot for certbot to issue certificates
+    location /.well-known/acme-challenge/ {
+      root /var/www/certbot;
+    }
+  }
+
+  # HTTPS server with reverse proxy
+  server {
+    listen 443 ssl;
+    server_name '"$domain"';
+    # Certificates issued by certbot
+    ssl_certificate /etc/letsencrypt/live/'"$domain"'/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/'"$domain"'/privkey.pem;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+    ssl_ciphers "ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384";
+
+    location / {
+      proxy_pass http://172.18.0.2:80;
+      proxy_set_header Host $host;
+      # Forward client IP
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+    }
+  }
+}
+EOL'
 
 compose=$(pwd)"/WordPress/docker-compose.yml"
 sudo docker compose -f $compose up -d
