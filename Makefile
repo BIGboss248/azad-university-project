@@ -55,20 +55,12 @@ docker:
 		sudo chmod g+rwx "$$HOME/.docker" -R || true; \
 		sudo systemctl enable docker.service; \
 		sudo systemctl enable containerd.service; \
-		code --install-extension ms-azuretools.vscode-docker; \
 		echo -e "\e[32mFor vscode extentions reboot is needed\e[0m"; \
 		sudo iptables -I FORWARD -p tcp -j ACCEPT -i docker0; \
 	fi
 
 open_ports:	# make open_ports port=80
 	sudo iptables -I INPUT -p tcp -j ACCEPT --dport $(PORT)
-
-vscode_extention:
-	code --install-extension ms-azuretools.vscode-docker
-	code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
-	code --install-extension ms-vscode.makefile-tools
-	code --install-extension aaron-bond.better-comments
-	code --install-extension mutantdino.resourcemonitor
 
 zerotier:
 	curl -s https://install.zerotier.com/ | sudo bash
@@ -95,7 +87,6 @@ webmin:
 	sudo passwd root
 
 nginx:
-	code --install-extension ahmadalli.vscode-nginx-conf
 	if nginx -v; then \
 		echo -e "\e[32mNginx already installed\e[0m"; \
 	else \
