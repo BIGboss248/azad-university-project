@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # One command setup run
-# curl -s https://raw.githubusercontent.com/BIGboss248/azad-university-project/refs/heads/main/setup.bash | bash
+# curl -O https://raw.githubusercontent.com/BIGboss248/azad-university-project/refs/heads/main/setup.bash
+# chmod +x setup.bash
+# ./setup.bash
 
 sudo apt update && sudo apt install make git nginx
 sudo snap install core
@@ -44,8 +46,8 @@ echo "New .env file created successfully at $env_file."
 
 makefile=$(pwd)"/Makefile"
 if [ -f $makefile ]; then
-  make docker
-  make certbot_nginx CLOUDFLARE_API_TOKEN=$cloudflare_token DOMAIN=$domain
+  sudo make docker
+  sudo make certbot_nginx CLOUDFLARE_API_TOKEN=$cloudflare_token DOMAIN=$domain
 else
   echo "Error: Makefile not found!"
   exit 1
@@ -84,11 +86,11 @@ http {
 
     location / {
       proxy_pass http://172.18.0.4:80;
-      proxy_set_header Host $host;
+      proxy_set_header Host $$host;
       # Forward client IP
-      proxy_set_header X-Real-IP $remote_addr;
-      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_set_header X-Real-IP $$remote_addr;
+      proxy_set_header X-Forwarded-For $$proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $$scheme;
     }
   }
 }
