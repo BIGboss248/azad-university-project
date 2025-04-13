@@ -117,7 +117,7 @@ certbot_cloudflare: certbot
 certbot_nginx: certbot_cloudflare nginx
 	sudo iptables -I INPUT -p tcp -j ACCEPT --dport 80
 	sudo iptables -I INPUT -p tcp -j ACCEPT --dport 443
-	sudo certbot certonly --dns-cloudflare --agree-tos --no-eff-email --dns-cloudflare --dns-cloudflare-credentials ~/.cloudflare/credentials.ini -d $(DOMAIN)
+	sudo certbot certonly --dns-cloudflare --agree-tos --no-eff-email --dns-cloudflare --dns-cloudflare-credentials $(HOME)/.cloudflare/credentials.ini -d $(DOMAIN)
 	sudo certbot renew --dry-run
 
 node_exporter:
