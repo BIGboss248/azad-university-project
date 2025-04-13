@@ -82,7 +82,7 @@ http {
     ssl_ciphers "ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384";
 
     location / {
-      proxy_pass http://172.18.0.2:80;
+      proxy_pass http://172.18.0.4:80;
       proxy_set_header Host $host;
       # Forward client IP
       proxy_set_header X-Real-IP $remote_addr;
