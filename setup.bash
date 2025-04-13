@@ -4,7 +4,8 @@
 # curl -s https://raw.githubusercontent.com/BIGboss248/azad-university-project/refs/heads/main/setup.bash | bash
 
 sudo apt update && sudo apt install make git nginx
-sudo snap install core; sudo snap refresh core
+sudo snap install core
+sudo snap refresh core
 sudo snap install --classic certbot
 
 git clone https://github.com/BIGboss248/azad-university-project.git
