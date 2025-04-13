@@ -93,6 +93,6 @@ http {
 }
 EOL'
 
-sudo systemctl restart nginx
+sudo nginx -s reload
 compose=$(pwd)"/WordPress/docker-compose.yml"
 sudo docker compose -f $compose up -d
