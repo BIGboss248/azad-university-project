@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # One command setup run
-# curl -O https://raw.githubusercontent.com/BIGboss248/azad-university-project/refs/heads/main/setup.bash
-# chmod +x setup.bash
-# ./setup.bash
+sudo rm -rf azad-university-project .cloudflare setup.bash
+curl -O https://raw.githubusercontent.com/BIGboss248/azad-university-project/refs/heads/main/setup.bash
+chmod +x setup.bash
+./setup.bash
 
 sudo apt update && sudo apt install make git nginx
 sudo snap install core

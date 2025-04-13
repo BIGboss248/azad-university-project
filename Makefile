@@ -104,8 +104,11 @@ certbot_cloudflare: certbot
 	if [ -f ~/.cloudflare/credentials.ini ]; then \
 		echo -e "\e[32mCloudflare credentials already exist\e[0m"; \
 	else \
+	echo -e "\e[32mCreating .cloudflare folder\e[0m"; \
 	mkdir ~/.cloudflare || true; \
+	echo -e "\e[32mCreating credentials.ini file\e[0m"; \
 	touch ~/.cloudflare/credentials.ini; \
+	echo -e "\e[32mpasting token in file\e[0m"; \
 	echo "dns_cloudflare_api_token = $(CLOUDFLARE_API_TOKEN)" > ~/.cloudflare/credentials.ini; \
 	chmod 600 ~/.cloudflare/credentials.ini; \
 	sudo snap install certbot-dns-cloudflare; \
