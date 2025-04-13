@@ -4,15 +4,13 @@
 
 ## نحوه اچرای پروژه
 
-ابتدا این مخزن را روی سرور خود کپی میکنیم
+کافی است فقط فرمان زیر را اجرا کنید و توکن کلودفلر و نام دامنه خود را وارد کنید
 
 ```console
-git clone https://github.com/BIGboss248/azad-university-project.git
+sudo rm -rf azad-university-project .cloudflare setup.bash
+curl -O https://raw.githubusercontent.com/BIGboss248/azad-university-project/refs/heads/main/setup.bash
+chmod +x setup.bash
+./setup.bash
 ```
 
-پس از آن 
-
-```console
-sudo apt update && sudo apt install make
-```
-پس از نصب make
+اگر دامنه یا توکن را در اختیار ندارید برای راهنمایی فایل pdf را مطالعه کنید
